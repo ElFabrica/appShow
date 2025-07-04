@@ -16,7 +16,7 @@ export function Home({ navigation }: StackRoutesProps<"home">) {
     const [tasksPassword, setTasksPassword] = useState('');
 
     const ACESSO_KEY = "Fala1234@";
-    const TASKS_KEY = "Tasks1234@";
+    const TASKS_KEY = "Premios1234@";
 
     // Função de verificar senha para acesso restrito (Users)
     function acessoRestrito() {
@@ -60,27 +60,7 @@ export function Home({ navigation }: StackRoutesProps<"home">) {
 
                 {/* Conteúdo principal */}
                 <View style={styles.main}>
-                    <LottieView
-                        source={require('../../assets/animations/Estudant.json')}
-                        autoPlay
-                        loop
-                        style={styles.animation}
-                    />
-                    <Text style={styles.title}>
-                        Bem-vindo ao{"\n"}Questionário
-                    </Text>
-
-
-                    <View style={styles.content}>
-
-                        <View style={styles.buttonContainer}>
-                            <Button
-                                size={22}
-                                title="Iniciar"
-                                onPress={() => navigation.navigate("form")}
-                            />
-                        </View>
-                    </View>
+                <Button title="Prosseguir"/>
                 </View>
 
                 {/* Modal com opções */}

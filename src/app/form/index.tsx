@@ -32,15 +32,15 @@ export function Form({ navigation }: StackRoutesProps<"form">) {
   //Função que salva o formulário no storge do smartphone
   async function onSubmit() {
     //Valida de algum dos dados estão vazios
-    if (!(name && email && phone)) {
+    if (!(name && phone)) {
       Alert.alert("Erro", "Preencha todos os dados");
       return;
     }
     //Valida se o email é um email válido (Não verifica se o email existe)
-    if (!validator.validate(email)) {
+    {/*if (!validator.validate(email)) {
       Alert.alert("Erro", "E-mail inválido");
       return;
-    }
+    }*/}
     //Caso funcione tudo redondo
     const id = Math.random().toString(30).substring(2, 20);  // Gerar ID único
     try {
@@ -97,7 +97,7 @@ export function Form({ navigation }: StackRoutesProps<"form">) {
                 onChangeText={setName}
               />
             </View>
-            {/* EMAIL */}
+            {/* EMAIL 
             <View style={styles.inputContainer}>
               <Text style={styles.inputLabel}>Email</Text>
               <Input place="seu@email.com"
@@ -105,7 +105,7 @@ export function Form({ navigation }: StackRoutesProps<"form">) {
                 onChangeText={setEmail}
               />
             </View>
-
+*/}
             {/* TELEFONE */}
             <View style={styles.inputContainer}>
               <Text style={styles.inputLabel}>Telefone</Text>

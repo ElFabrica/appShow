@@ -3,7 +3,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 export const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#f81fb4",
+        backgroundColor: "#5DE2E7",
         borderRadius: 12,
         alignItems: "center",
         justifyContent: "center",
