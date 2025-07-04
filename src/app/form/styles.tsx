@@ -23,12 +23,12 @@ export const styles = StyleSheet.create({
   },content:{
     gap:16
   },
-  animation: {
-    width: '50%',
-    height: 160,
+  imagem: {
+    width: RFValue(170),
+    height: RFValue(170),
   },
   title: {
-    color: '#f81fb4', // text-blue-500
+    color: '#9fa100', // text-blue-500
     fontSize: RFValue(32),
     fontWeight: 'bold',
     textAlign: 'center',
@@ -47,7 +47,7 @@ export const styles = StyleSheet.create({
         fontWeight: 600,
         borderWidth: 2,
         borderRadius: 8,
-        borderColor:"#46f23c",
+        borderColor:"#e2e600",
         padding: 16,
         width: "100%",
         minHeight: "auto",

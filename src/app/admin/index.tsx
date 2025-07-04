@@ -1,45 +1,57 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable, Alert } from 'react-native';
-import tw from 'twrnc';
+import { View, Text, Pressable, Modal } from 'react-native';
 import { styles } from './styles';
 import { SujeitoShow } from '@/type/TypeShow';
-import { UserStorge } from '@/storge/users';
-import { CardSujeito, sujeitoImages } from '@/components/card';
+import { UserStorge, userStorge } from '@/storge/users';
 import { CardSorteio } from '@/components/CardSorteio';
+import { sujeitoImages } from '@/components/card';
+import LottieView from 'lottie-react-native';
 
 export function Admin() {
   const [isRunning, setIsRunning] = useState(false);
+  const [winner, setWinner] = useState<userStorge | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [currentPrize, setCurrentPrize] = useState<SujeitoShow | null>(null);
+  const [showModal2, setShowModal2] = useState(false);
+  const [countdown, setCountdown] = useState<number | null>(null);
 
   async function handleDraw(sujeito: SujeitoShow) {
-    if (isRunning) return; // impede duplo clique
+    if (isRunning) return;
     setIsRunning(true);
+    setCountdown(3);
+    setCurrentPrize(sujeito);
+    setShowModal2(true);
+
     try {
-      // faz busca dos usuários cadastrados com sorteio igual ao artista
       const users = await UserStorge.get();
       const filtered = users.filter((user) => user.sorteio === sujeito);
 
       if (filtered.length === 0) {
-        Alert.alert('Ops', `Nenhum participante para ${sujeito}`);
         setIsRunning(false);
+        setWinner(null);
+        setShowModal2(false);
+        setShowModal(true);
         return;
       }
 
-      // drama do sorteio
       let count = 3;
       const interval = setInterval(() => {
+        setCountdown(count);
         if (count === 0) {
           clearInterval(interval);
-          const winner = filtered[Math.floor(Math.random() * filtered.length)];
-          Alert.alert('🎉 Parabéns!', `O ganhador do sorteio do ${sujeito} é ${winner.name}!`);
+          const winnerUser = filtered[Math.floor(Math.random() * filtered.length)];
+          setWinner(winnerUser);
+          setShowModal2(false);
+          setShowModal(true);
           setIsRunning(false);
-        } else {
-          Alert.alert('Sorteando...', `${count}...`);
-          count--;
         }
+        count--;
       }, 1000);
+
     } catch (error) {
-      Alert.alert('Erro', 'Não foi possível realizar o sorteio');
       setIsRunning(false);
+      setShowModal2(false);
+      console.log('Erro no sorteio:', error);
     }
   }
 
@@ -48,21 +60,69 @@ export function Admin() {
       <Text style={styles.title}>🎤 Painel de Sorteio</Text>
       <View style={styles.buttonsContainer}>
         <Pressable style={styles.button} onPress={() => handleDraw(SujeitoShow.Pablo)}>
-          <Text style={styles.buttonText}>{SujeitoShow.Pablo}</Text>
-          <CardSorteio
-          name={SujeitoShow.Pablo}
-          src={sujeitoImages.Pablo}
-
-          />
+          <CardSorteio name={SujeitoShow.Pablo} src={sujeitoImages.Pablo} />
         </Pressable>
         <Pressable style={styles.button} onPress={() => handleDraw(SujeitoShow.sorrisoMaroto)}>
-          <CardSorteio
-          name={SujeitoShow.sorrisoMaroto}
-          src={sujeitoImages['Sorriso Maroto']}
-
-          />
+          <CardSorteio name={SujeitoShow.sorrisoMaroto} src={sujeitoImages['Sorriso Maroto']} />
         </Pressable>
       </View>
+
+      {/* Modal do ganhador */}
+      <Modal
+        animationType="fade"
+        transparent
+        visible={showModal}
+        onRequestClose={() => setShowModal(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            {winner ? (
+              <>
+                <LottieView
+                  source={require('@/assets/animations/Congregations.json')} // substitua pelo seu arquivo
+                  autoPlay
+                  loop={false}
+                  style={styles.lottie}
+                />
+                <Text style={styles.modalTitle}>🎉 Parabéns!</Text>
+                <Text style={styles.modalText}>
+                  O ganhador do sorteio do {currentPrize} é:
+                </Text>
+                <Text style={styles.modalWinner}>{winner.name}</Text>
+              </>
+            ) : (
+              <>
+                <Text style={styles.modalTitle}>⚠️ Sem participantes</Text>
+                <Text style={styles.modalText}>
+                  Nenhum participante para {currentPrize}.
+                </Text>
+              </>
+            )}
+            <Pressable style={styles.closeButton} onPress={() => setShowModal(false)}>
+              <Text style={styles.closeButtonText}>Fechar</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Modal da contagem regressiva */}
+      <Modal
+        animationType="fade"
+        transparent
+        visible={showModal2}
+        onRequestClose={() => setShowModal2(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Text style={styles.countdownText}>
+              {countdown !== null ? countdown : ''}
+            </Text>
+            <Text style={styles.modalText}>
+              Sorteio do {currentPrize} começando...
+            </Text>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }

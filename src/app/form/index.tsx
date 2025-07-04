@@ -7,22 +7,21 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   Pressable,
-  Keyboard
+  Keyboard,
+  Image
 } from "react-native";
 
 import { CircleDashed, CircleCheck } from "lucide-react-native";
 
-import validator from 'email-validator';
+
 import { styles } from "./styles";
-import LottieView from 'lottie-react-native';
+
 import { userStorge, UserStorge } from "@/storge/users";
 import MaskInput from 'react-native-mask-input'
 import { StackRoutesProps } from "@/routes/StackRoutes";
 import { Button } from "@/components/buttons";
 import { Input } from "@/components/Input";
 import { RFValue } from "react-native-responsive-fontsize";
-import { SujeitoShow } from "@/type/TypeShow";
-import { CardSujeito, sujeitoImages } from "@/components/card/index";
 
 export function Form({ navigation }: StackRoutesProps<"form">) {
   const [name, setName] = useState("");
@@ -85,11 +84,9 @@ export function Form({ navigation }: StackRoutesProps<"form">) {
           keyboardShouldPersistTaps="handled"
         >
           <View style={styles.animationContainer}>
-            <LottieView
-              source={require('../../assets/animations/Form.json')}
-              autoPlay
-              loop
-              style={styles.animation}
+            <Image
+              source={require('../../assets/LOGO ACT.png')}
+              style={styles.imagem}
             />
           </View>
 
@@ -150,7 +147,7 @@ export function Form({ navigation }: StackRoutesProps<"form">) {
 
           {/* BOTÃO */}
           <View style={styles.Footer}>
-            <Button title="Começar"
+            <Button title="Cadastrar"
               onPress={onSubmit}
               disable={!isConfirmed}
             />

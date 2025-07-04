@@ -73,7 +73,7 @@ async function handleUnicUser() {
           <View style={styles.content}>
               <Text style={styles.textOption}>
 
-                Se fosse pra montar o line-up dos seus sonhos… quem seria a atração principal?
+                Se fosse pra montar uma festa dos seus sonhos… quem seria a atração principal?
               </Text>
               <Pressable 
               onPress={()=> setSujeito(SujeitoShow.Pablo)}>
