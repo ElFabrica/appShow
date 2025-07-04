@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
   main: {
     flex: 1,
     alignItems: 'center',
+    justifyContent:"center",
     gap: 16,
     padding: 8,
     paddingHorizontal: 20

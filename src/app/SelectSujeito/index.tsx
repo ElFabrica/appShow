@@ -10,31 +10,29 @@ import {
   Keyboard
 } from "react-native";
 
-import { CircleDashed, CircleCheck } from "lucide-react-native";
-
-import validator from 'email-validator';
 import { styles } from "./styles";
 import LottieView from 'lottie-react-native';
 import { userStorge, UserStorge } from "@/storge/users";
 import MaskInput from 'react-native-mask-input'
 import { StackRoutesProps } from "@/routes/StackRoutes";
 import { Button } from "@/components/buttons";
-import { Input } from "@/components/Input";
-import { RFValue } from "react-native-responsive-fontsize";
+
 import { SujeitoShow } from "@/type/TypeShow";
 import { CardSujeito, sujeitoImages } from "@/components/card/index";
+import { useRoute } from "@react-navigation/native"
 
-export function Form({ navigation }: StackRoutesProps<"form">) {
+type RouteParams =  StackRoutesProps <"selectSujeito">
+
+
+export function SelectSujeito({ navigation, route }: StackRoutesProps<"selectSujeito">) {
+const { params } = useRoute <RouteParams["route"]> ()
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [sujeito, setSujeito] = useState<SujeitoShow>()
-
-
-
-
-
+  const [user, setUser] = useState<userStorge>()
 
 
 
@@ -89,67 +87,8 @@ export function Form({ navigation }: StackRoutesProps<"form">) {
           contentContainerStyle={styles.scrollContainer}
           keyboardShouldPersistTaps="handled"
         >
-          <View style={styles.animationContainer}>
-            <LottieView
-              source={require('../../assets/animations/Form.json')}
-              autoPlay
-              loop
-              style={styles.animation}
-            />
-          </View>
-
-          <Text style={styles.title}>
-            Cadastro
-          </Text>
-
+         
           <View style={styles.content}>
-            {/* NOME */}
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Nome</Text>
-              <Input place="John"
-                value={name}
-                onChangeText={setName}
-              />
-            </View>
-            {/* EMAIL 
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Email</Text>
-              <Input place="seu@email.com"
-                value={email}
-                onChangeText={setEmail}
-              />
-            </View>
-*/}
-            {/* TELEFONE */}
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Telefone</Text>
-              <MaskInput
-                value={phone}
-                onChangeText={setPhone}
-                mask={['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
-                keyboardType="numeric"
-                placeholder="(00) 00000-0000"
-                style={styles.input}
-              />
-            </View>
-            <Pressable
-              style={styles.inputContainer}
-              onPress={() => setIsConfirmed(!isConfirmed)}
-            >
-              <View style={styles.checkboxContainer}>
-                <Text style={styles.checkboxIcon}>
-                  {isConfirmed ? <CircleCheck color={"#333333"} size={RFValue(20)} /> : <CircleDashed color={"#333333"} size={RFValue(20)} />}
-                </Text>
-                <Text style={styles.checkboxText}>
-                  Ao preencher com seus dados, você autoriza o uso das informações fornecidas
-                  para que possamos entrar em contato e melhorar nossos serviços,
-                  sempre respeitando a sua privacidade.
-                </Text>
-              </View>
-
-
-            </Pressable>
-
               <Text style={styles.textOption}>
                 Se fosse pra montar o line-up dos seus sonhos… quem seria a atração principal?
               </Text>

@@ -1,4 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { SujeitoShow } from "@/type/TypeShow";
+
 
 const ITEMS_STORGE_KEY = "@appQuiz:Users"
 
@@ -8,6 +10,7 @@ export type userStorge = {
     phone: string
     email: string
     game?: string
+    sorteio?: SujeitoShow
 }
 //Faz uma busca de todos os itens dessa tabela
 async function get(): Promise<userStorge[]> {

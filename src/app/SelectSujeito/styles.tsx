@@ -97,6 +97,6 @@ cabas:{
 },
 textOption:{
   textAlign: "center",
-  fontSize: RFValue(20)
+  fontSize: RFValue(25)
 }
 });

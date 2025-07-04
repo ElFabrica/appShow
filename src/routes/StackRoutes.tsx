@@ -5,12 +5,14 @@ import { Form } from "@/app/form/index";
 import { Home } from "@/app/home/index";
 import { Users } from "@/app/users";
 import { Admin } from "@/app/admin";
+import { SelectSujeito } from "@/app/SelectSujeito";
 
 export type StackRoutesList = {
   home: undefined;
   form: undefined;
   users: undefined;
   admin: undefined;
+  selectSujeito: undefined;
   
 };
 
@@ -48,6 +50,13 @@ export function StacksRoutes() {
       <Stack.Screen
         name="admin"
         component={Admin}
+        options={{
+          headerShown: true,
+        }}
+      />
+        <Stack.Screen
+        name="selectSujeito"
+        component={SelectSujeito}
         options={{
           headerShown: true,
         }}

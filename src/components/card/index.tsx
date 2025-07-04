@@ -1,22 +1,37 @@
-import { View, Text, Image,ImageProps } from "react-native";
+import { View, Text, Image, ImageProps, ImageSourcePropType } from "react-native";
 import { CircleDashed, CircleCheck } from "lucide-react-native";
 import { RFValue } from "react-native-responsive-fontsize";
+import { SujeitoShow } from "@/type/TypeShow";
+import { styles } from "../card/styles";
+
+export const sujeitoImages: Record<SujeitoShow, any> = {
+  [SujeitoShow.sorrisoMaroto]: require("../../assets/cabas/SorrisoMaroto.jpg"),
+  [SujeitoShow.Pablo]: require("../../assets/cabas/Pablo.jpg")
+};
 
 type props = ImageProps & {
-        src: string
-        selected: boolean
-    }
-function card({selected, src, ...rest}: props) {
-    
-    return(
-        <View>
-            <View>{ selected === true? <CircleCheck size={RFValue(20)} />: <CircleDashed size={RFValue(20)} />}
-            </View>
-            <View>
-                <Text>
 
+    IsSelected: boolean
+    name: SujeitoShow
+    src: ImageSourcePropType
+}
+export function CardSujeito({ IsSelected, name, src, ...rest }: props) {
+
+    return (
+        <View>
+            <View style={styles.icon}>
+                
+                {IsSelected === true ? <CircleCheck size={RFValue(20)} /> : <CircleDashed size={RFValue(20)} />}
+            </View>
+            <View style={styles.main}>
+                <Text style={styles.nameText}>
+                    {name}
                 </Text>
-                <Image source={require("")}/>
+                <View style={styles.ContainerImage}>
+                    <Image source={src} 
+                    style={styles.image}
+                    />
+                </View>
             </View>
 
         </View>
