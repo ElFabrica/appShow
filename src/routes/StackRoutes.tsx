@@ -24,7 +24,7 @@ const Stack = createNativeStackNavigator<StackRoutesList>();
 export function StacksRoutes() {
   return (
     <Stack.Navigator
-      initialRouteName="home"
+      initialRouteName="selectSujeito"
       screenOptions={{
         headerShown: false,
       }}
@@ -58,7 +58,7 @@ export function StacksRoutes() {
         name="selectSujeito"
         component={SelectSujeito}
         options={{
-          headerShown: true,
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

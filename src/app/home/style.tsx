@@ -12,7 +12,13 @@ export const styles = StyleSheet.create({
     justifyContent:"center",
     gap: 16,
     padding: 8,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    opacity:0
+  },
+  
+  buttonBackgound:{
+    flex:1
+    
   },
   title: {
     color: '#f81fb4', // text-blue-500

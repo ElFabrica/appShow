@@ -74,25 +74,14 @@ const { params } = useRoute <RouteParams["route"]> ()
   }
 
   return (
-    <View>
-      {/*
-    <ImageBackground source={require("../../assets/Background_with-logo.png")}
-      resizeMode="cover"
-      style={{ flex: 1 }}
-    >
-      */}
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <View style={styles.conteiner}>
 
-        <ScrollView
-          contentContainerStyle={styles.scrollContainer}
-          keyboardShouldPersistTaps="handled"
-        >
+
          
           <View style={styles.content}>
               <Text style={styles.textOption}>
                 Se fosse pra montar o line-up dos seus sonhos… quem seria a atração principal?
               </Text>
-               <View style={styles.cabas}>
               <Pressable 
               onPress={()=> setSujeito(SujeitoShow.Pablo)}>
               <CardSujeito
@@ -104,7 +93,7 @@ const { params } = useRoute <RouteParams["route"]> ()
               </Pressable>
 
               <Pressable 
-              onPress={()=> setSujeito(SujeitoShow.sorrisoMaroto)}>
+              onPress={()=> [setSujeito(SujeitoShow.sorrisoMaroto), setIsConfirmed(true)]}>
               <CardSujeito
               IsSelected={sujeito== SujeitoShow.sorrisoMaroto}
               name={SujeitoShow.sorrisoMaroto}
@@ -113,21 +102,16 @@ const { params } = useRoute <RouteParams["route"]> ()
               />
               </Pressable>
               
-            </View>
           </View>
 
           {/* BOTÃO */}
           <View style={styles.Footer}>
-            <Button title="Começar"
+            <Button title="Confirmar"
               onPress={onSubmit}
               disable={!isConfirmed}
             />
 
           </View>
-        </ScrollView>
-      </TouchableWithoutFeedback>
-
-      {/*</ImageBackground>*/}
     </View>
   )
 }

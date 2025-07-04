@@ -4,16 +4,16 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+
   },
-  scrollContainer: {
+  conteiner: {
     flexGrow: 1,
     paddingHorizontal: 24,
-    marginBottom: 80,
+    alignContent:"center",
+    justifyContent:"center",
+    alignItems:"center"
   },
-  animationContainer: {
-    alignItems: 'center',
-    marginTop: 16
-  },
+
   Footer: {
     alignItems: 'center',
     marginTop: 16,
@@ -21,7 +21,10 @@ export const styles = StyleSheet.create({
     width:"100%"
   
   },content:{
-    gap:16
+    gap:16,
+    alignContent:"center",
+    justifyContent:"center",
+    alignItems:"center"
   },
   animation: {
     width: '50%',

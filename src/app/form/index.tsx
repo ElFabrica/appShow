@@ -68,7 +68,7 @@ export function Form({ navigation }: StackRoutesProps<"form">) {
       setSujeito(undefined)
 
       // Navega para a próxima tela
-      navigation.navigate("home");
+      navigation.navigate("selectSujeito");
     } catch (error) {
       console.error("Erro ao salvar dados no banco:", error);
       Alert.alert("Erro", "Não foi possível salvar os dados.");
@@ -150,31 +150,7 @@ export function Form({ navigation }: StackRoutesProps<"form">) {
 
             </Pressable>
 
-              <Text style={styles.textOption}>
-                Se fosse pra montar o line-up dos seus sonhos… quem seria a atração principal?
-              </Text>
-               <View style={styles.cabas}>
-              <Pressable 
-              onPress={()=> setSujeito(SujeitoShow.Pablo)}>
-              <CardSujeito
-              IsSelected={sujeito== SujeitoShow.Pablo}
-              name={SujeitoShow.Pablo}
-              src={sujeitoImages[SujeitoShow.Pablo]}
               
-              />
-              </Pressable>
-
-              <Pressable 
-              onPress={()=> setSujeito(SujeitoShow.sorrisoMaroto)}>
-              <CardSujeito
-              IsSelected={sujeito== SujeitoShow.sorrisoMaroto}
-              name={SujeitoShow.sorrisoMaroto}
-              src={sujeitoImages[SujeitoShow.sorrisoMaroto]}
-              
-              />
-              </Pressable>
-              
-            </View>
           </View>
 
           {/* BOTÃO */}

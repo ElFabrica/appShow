@@ -46,12 +46,12 @@ export function Home({ navigation }: StackRoutesProps<"home">) {
 
     return (
         <View style={styles.container}>
-        {/*
-        <ImageBackground source={require("../../assets/Background_with-logo.png")}
+
+        <ImageBackground source={require("../../assets/background 01.png")}
             resizeMode="cover"
             style={{ flex: 1 }}
         >
-            */}
+    
             <View style={styles.container}>
                 {/* Ícone de configurações */}
                 <View style={styles.header}>
@@ -63,8 +63,13 @@ export function Home({ navigation }: StackRoutesProps<"home">) {
 
                 {/* Conteúdo principal */}
                 <View style={styles.main}>
+                    <Pressable
+                    onPress={()=> navigation.navigate("form")}
+                    style={styles.buttonBackgound}
+                    >
                 <Button title="Prosseguir"
-                onPress={()=> navigation.navigate("form")}/>
+                />
+                </Pressable>
                 </View>
 
                 {/* Modal com opções */}
@@ -190,7 +195,7 @@ export function Home({ navigation }: StackRoutesProps<"home">) {
                 </Modal>
             </View>
          
-        {/* </ImageBackground> */}
+</ImageBackground> 
         </View>
     );
 }
