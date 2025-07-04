@@ -1,5 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { userStorge } from "@/storge/users";
+
 
 import { Form } from "@/app/form/index";
 import { Home } from "@/app/home/index";
@@ -12,7 +14,7 @@ export type StackRoutesList = {
   form: undefined;
   users: undefined;
   admin: undefined;
-  selectSujeito: undefined;
+  selectSujeito: {id:string}
   
 };
 
@@ -24,7 +26,7 @@ const Stack = createNativeStackNavigator<StackRoutesList>();
 export function StacksRoutes() {
   return (
     <Stack.Navigator
-      initialRouteName="selectSujeito"
+      initialRouteName="home"
       screenOptions={{
         headerShown: false,
       }}

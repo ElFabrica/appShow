@@ -23,6 +23,16 @@ async function get(): Promise<userStorge[]> {
         throw new Error("ITEMS_GET: " + error)
     }
 }
+async function getById(id:string): Promise<userStorge[]> {
+    try {
+        const storge = await get()
+        const storgeFilter = storge.filter((item) => item.id === id)
+        return storgeFilter
+
+    } catch (error) {
+        throw new Error("ITEMS_GET: " + error)
+    }
+}
 //Faz um filtro de todos os itens com base num parâmetro
 //Salva os itens dentro do banco de dados do dispositivo
 async function save(items: userStorge[]): Promise<void> {
@@ -55,14 +65,33 @@ async function clear(): Promise<void> {
         throw new Error("ITEMS_CLEAR: " + error)
     }
 }
+
+async function selectCaba(user: userStorge, caba: SujeitoShow): Promise<userStorge[]> {
+  const items = await get();
+
+  const updatedItems = items.map((item) =>
+    item.id === user.id
+      ? {
+          ...item,
+          sorteio: caba, // atualiza sorteio com o novo caba
+        }
+      : item
+  );
+
+  await save(updatedItems);
+  return updatedItems;
+}
+
 //Altera o status do item 
 
 
 
 export const UserStorge = {
     get,
+    getById,
     save,
     add,
     remove,
-    clear
+    clear,
+    selectCaba
 }

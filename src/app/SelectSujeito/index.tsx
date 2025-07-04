@@ -11,9 +11,7 @@ import {
 } from "react-native";
 
 import { styles } from "./styles";
-import LottieView from 'lottie-react-native';
 import { userStorge, UserStorge } from "@/storge/users";
-import MaskInput from 'react-native-mask-input'
 import { StackRoutesProps } from "@/routes/StackRoutes";
 import { Button } from "@/components/buttons";
 
@@ -26,43 +24,37 @@ type RouteParams =  StackRoutesProps <"selectSujeito">
 
 export function SelectSujeito({ navigation, route }: StackRoutesProps<"selectSujeito">) {
 const { params } = useRoute <RouteParams["route"]> ()
+const id = params.id;
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [sujeito, setSujeito] = useState<SujeitoShow>()
   const [user, setUser] = useState<userStorge>()
 
-
-
   //Função que salva o formulário no storge do smartphone
-  async function onSubmit() {
-    //Valida de algum dos dados estão vazios
-    if (!(name && phone)) {
-      Alert.alert("Erro", "Preencha todos os dados");
-      return;
+
+async function handleUnicUser() {
+  try {
+    const userRefer = await UserStorge.getById(id);
+    if (userRefer.length > 0) {
+      console.log("Achei o dado:", userRefer[0]);
+      setUser(userRefer[0]);
+    } else {
+      console.log("Não achei o dado");
     }
-    //Valida se o email é um email válido (Não verifica se o email existe)
-    {/*if (!validator.validate(email)) {
-      Alert.alert("Erro", "E-mail inválido");
-      return;
-    }*/}
-    //Caso funcione tudo redondo
-    const id = Math.random().toString(30).substring(2, 20);  // Gerar ID único
+  } catch (error) {
+    console.log("Algo ocorreu de errado para pegar o usuário cadastrado", error);
+  }
+}
+  async function onSubmit() {
+    if(!user || !sujeito){
+      return
+    }
+    ;  // Gerar ID único
     try {
-      const newItem = {
-        id: Math.random().toString(36).substring(2),
-        name,
-        email,
-        phone,
-        sujeito
-      }
-      await UserStorge.add(newItem)
-      // Limpeza do formulário
-      setName("");
-      setEmail("");
-      setPhone("");
+      
+      await UserStorge.selectCaba(user, sujeito )
+      // Limpeza
+
       setSujeito(undefined)
 
       // Navega para a próxima tela
@@ -72,14 +64,15 @@ const { params } = useRoute <RouteParams["route"]> ()
       Alert.alert("Erro", "Não foi possível salvar os dados.");
     }
   }
+  useEffect(()=>{
+    handleUnicUser()
+  }, [])
 
   return (
     <View style={styles.conteiner}>
-
-
-         
           <View style={styles.content}>
               <Text style={styles.textOption}>
+
                 Se fosse pra montar o line-up dos seus sonhos… quem seria a atração principal?
               </Text>
               <Pressable 

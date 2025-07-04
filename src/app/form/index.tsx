@@ -29,14 +29,7 @@ export function Form({ navigation }: StackRoutesProps<"form">) {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [isConfirmed, setIsConfirmed] = useState(false);
-  const [sujeito, setSujeito] = useState<SujeitoShow>()
-
-
-
-
-
-
-
+  const [idSujeito, setIdSujeito] = useState("")
 
   //Função que salva o formulário no storge do smartphone
   async function onSubmit() {
@@ -54,21 +47,23 @@ export function Form({ navigation }: StackRoutesProps<"form">) {
     const id = Math.random().toString(30).substring(2, 20);  // Gerar ID único
     try {
       const newItem = {
-        id: Math.random().toString(36).substring(2),
+        id: id,
         name,
         email,
         phone,
-        sujeito
+        idSujeito
       }
       await UserStorge.add(newItem)
+      setIdSujeito(id)
       // Limpeza do formulário
       setName("");
       setEmail("");
       setPhone("");
-      setSujeito(undefined)
+      setIdSujeito("")
 
       // Navega para a próxima tela
-      navigation.navigate("selectSujeito");
+      console.log(id)
+      navigation.navigate("selectSujeito", {id:id});
     } catch (error) {
       console.error("Erro ao salvar dados no banco:", error);
       Alert.alert("Erro", "Não foi possível salvar os dados.");

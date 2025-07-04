@@ -95,7 +95,7 @@ export function Users() {
           <View style={tw`flex-row justify-between items-center`}>
             <Text style={tw`text-base text-center min-w-30`}>Nome</Text>
             <Text style={tw`text-base text-center min-w-30`}>Email</Text>
-            <Text style={tw`text-base text-center min-w-30`}>Telefone</Text>
+            <Text style={tw`text-base text-center min-w-30`}>Interesse</Text>
           </View>
         )}
         <View style={{height: "84%"}}>
@@ -105,8 +105,8 @@ export function Users() {
           renderItem={({item}) =>(
             <View key={item.id} style={tw`flex-row justify-between`}>
               <Text style={tw`text-base text-center min-w-30`}>{item.name}</Text>
-              <Text style={tw`text-base text-center min-w-30`}>{item.email}</Text>
               <Text style={tw`text-base text-center min-w-30`}>{item.phone}</Text>
+              <Text style={tw`text-base text-center min-w-30`}>{item.sorteio}</Text>
             </View>
         )
         }
