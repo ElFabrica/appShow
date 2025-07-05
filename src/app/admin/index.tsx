@@ -13,6 +13,7 @@ export function Admin() {
   const [showModal, setShowModal] = useState(false);
   const [currentPrize, setCurrentPrize] = useState<SujeitoShow | null>(null);
   const [showModal2, setShowModal2] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
   const [countdown, setCountdown] = useState<number | null>(null);
 
   async function handleDraw(sujeito: SujeitoShow) {
@@ -42,8 +43,16 @@ export function Admin() {
           const winnerUser = filtered[Math.floor(Math.random() * filtered.length)];
           setWinner(winnerUser);
           setShowModal2(false);
+
+          // Mostrar parabéns + confete por cima
           setShowModal(true);
-          setIsRunning(false);
+          setShowConfetti(true);
+
+          // Após 2s, esconder confete e fechar modal
+          setTimeout(() => {
+            setShowConfetti(false);
+            setIsRunning(false);
+          }, 2000);
         }
         count--;
       }, 1000);
@@ -78,17 +87,12 @@ export function Admin() {
           <View style={styles.modalContent}>
             {winner ? (
               <>
-                <LottieView
-                  source={require('@/assets/animations/Congregations.json')} // substitua pelo seu arquivo
-                  autoPlay
-                  loop={false}
-                  style={styles.lottie}
-                />
                 <Text style={styles.modalTitle}>🎉 Parabéns!</Text>
                 <Text style={styles.modalText}>
                   O ganhador do sorteio do {currentPrize} é:
                 </Text>
                 <Text style={styles.modalWinner}>{winner.name}</Text>
+                <Text style={styles.modalWinner}>{winner.phone}</Text>
               </>
             ) : (
               <>
@@ -102,6 +106,16 @@ export function Admin() {
               <Text style={styles.closeButtonText}>Fechar</Text>
             </Pressable>
           </View>
+
+          {/* Lottie de confete absoluto sobre a tela */}
+          {showConfetti && (
+            <LottieView
+              source={require('@/assets/animations/Congregations.json')}
+              autoPlay
+              loop={false}
+              style={styles.absoluteLottie}
+            />
+          )}
         </View>
       </Modal>
 

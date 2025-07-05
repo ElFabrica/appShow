@@ -101,5 +101,31 @@ cabas:{
 textOption:{
   textAlign: "center",
   fontSize: RFValue(25)
-}
+},
+modalOverlay: {
+  flex: 1,
+  backgroundColor: 'rgba(0, 0, 0, 0.5)', // preto com 50% de opacidade
+  justifyContent: 'center',
+  alignItems: 'center',
+
+
+},
+modalContent: {
+  backgroundColor: '#fff',
+  padding: RFValue(24),
+  borderRadius: RFValue(16),
+  alignItems: 'center',
+  maxWidth: '80%',
+},
+modalTitle: {
+  fontSize: (20),
+  fontWeight: 'bold',
+  marginBottom: 8,
+},
+modalText: {
+  fontSize: 16,
+  textAlign: 'center',
+},
+
+
 });

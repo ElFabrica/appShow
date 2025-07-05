@@ -81,4 +81,13 @@ export const styles = StyleSheet.create({
     height: 150,
     marginBottom: 20,
   },
+  absoluteLottie: {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  zIndex: 10, // Garante que fique por cima do modal
+},
+
 });

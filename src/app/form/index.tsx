@@ -37,6 +37,10 @@ export function Form({ navigation }: StackRoutesProps<"form">) {
       Alert.alert("Erro", "Preencha todos os dados");
       return;
     }
+    if (isConfirmed===false) {
+      Alert.alert("Erro", "Confirme o termo");
+      return;
+    }
     //Valida se o email é um email válido (Não verifica se o email existe)
     {/*if (!validator.validate(email)) {
       Alert.alert("Erro", "E-mail inválido");
@@ -68,7 +72,10 @@ export function Form({ navigation }: StackRoutesProps<"form">) {
       Alert.alert("Erro", "Não foi possível salvar os dados.");
     }
   }
+useEffect(() =>{
+  setIsConfirmed(false)
 
+},[])
   return (
     <View>
       {/*
