@@ -2,11 +2,19 @@ import { StyleSheet } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+    main:{
+    flex:1,
+    alignItems:"center",
+    width:"100%",
     backgroundColor: '#e7e7e7',
+  },
+  
+  container: {
+    
+    flex: 1,
+    
     alignItems: 'center',
-    justifyContent: 'center',
+    
 
   },
   title: {
@@ -66,19 +74,19 @@ export const styles = StyleSheet.create({
   },
   closeButtonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: RFValue(16),
     fontWeight: 'bold',
   },
   countdownText: {
-    fontSize: 72,
+    fontSize: RFValue(72),
     fontWeight: 'bold',
     color: '#6200ee',
     marginBottom: 20,
     textAlign: 'center',
   },
   lottie: {
-    width: 150,
-    height: 150,
+    width: RFValue(150),
+    height: RFValue(150),
     marginBottom: 20,
   },
   absoluteLottie: {
@@ -89,5 +97,10 @@ export const styles = StyleSheet.create({
   bottom: 0,
   zIndex: 10, // Garante que fique por cima do modal
 },
+imagem: {
+    width: RFValue(100),
+    height: RFValue(100),
+  },
+
 
 });

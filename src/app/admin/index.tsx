@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable, Modal } from 'react-native';
+import { View, Text, Pressable, Modal, Image } from 'react-native';
 import { styles } from './styles';
 import { SujeitoShow } from '@/type/TypeShow';
 import { UserStorge, userStorge } from '@/storge/users';
@@ -65,78 +65,86 @@ export function Admin() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>🎤 Painel de Sorteio</Text>
-      <View style={styles.buttonsContainer}>
-        <Pressable style={styles.button} onPress={() => handleDraw(SujeitoShow.Pablo)}>
-          <CardSorteio name={SujeitoShow.Pablo} src={sujeitoImages.Pablo} />
-        </Pressable>
-        <Pressable style={styles.button} onPress={() => handleDraw(SujeitoShow.sorrisoMaroto)}>
-          <CardSorteio name={SujeitoShow.sorrisoMaroto} src={sujeitoImages['Sorriso Maroto']} />
-        </Pressable>
-      </View>
+    <View style={styles.main}>
+      <Image
+        source={require('../../assets/LOGO ACT.png')}
+        style={styles.imagem}
+      />
+      <View style={styles.container}>
 
-      {/* Modal do ganhador */}
-      <Modal
-        animationType="fade"
-        transparent
-        visible={showModal}
-        onRequestClose={() => setShowModal(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            {winner ? (
-              <>
-                <Text style={styles.modalTitle}>🎉 Parabéns!</Text>
-                <Text style={styles.modalText}>
-                  O ganhador do sorteio do {currentPrize} é:
-                </Text>
-                <Text style={styles.modalWinner}>{winner.name}</Text>
-                <Text style={styles.modalWinner}>{winner.phone}</Text>
-              </>
-            ) : (
-              <>
-                <Text style={styles.modalTitle}>⚠️ Sem participantes</Text>
-                <Text style={styles.modalText}>
-                  Nenhum participante para {currentPrize}.
-                </Text>
-              </>
+        <Text style={styles.title}>🎤 Painel de Sorteio</Text>
+        <View style={styles.buttonsContainer}>
+          <Pressable style={styles.button} onPress={() => handleDraw(SujeitoShow.Pablo)}>
+            <CardSorteio name={SujeitoShow.Pablo} src={sujeitoImages.Pablo} />
+          </Pressable>
+          <Pressable style={styles.button} onPress={() => handleDraw(SujeitoShow.sorrisoMaroto)}>
+            <CardSorteio name={SujeitoShow.sorrisoMaroto} src={sujeitoImages['Sorriso Maroto']} />
+          </Pressable>
+        </View>
+
+
+        {/* Modal do ganhador */}
+        <Modal
+          animationType="fade"
+          transparent
+          visible={showModal}
+          onRequestClose={() => setShowModal(false)}
+        >
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              {winner ? (
+                <>
+                  <Text style={styles.modalTitle}>🎉 Parabéns!</Text>
+                  <Text style={styles.modalText}>
+                    O ganhador do sorteio do {currentPrize} é:
+                  </Text>
+                  <Text style={styles.modalWinner}>{winner.name}</Text>
+                  <Text style={styles.modalWinner}>{winner.phone}</Text>
+                </>
+              ) : (
+                <>
+                  <Text style={styles.modalTitle}>⚠️ Sem participantes</Text>
+                  <Text style={styles.modalText}>
+                    Nenhum participante para {currentPrize}.
+                  </Text>
+                </>
+              )}
+              <Pressable style={styles.closeButton} onPress={() => setShowModal(false)}>
+                <Text style={styles.closeButtonText}>Fechar</Text>
+              </Pressable>
+            </View>
+
+            {/* Lottie de confete absoluto sobre a tela */}
+            {showConfetti && (
+              <LottieView
+                source={require('@/assets/animations/Congregations.json')}
+                autoPlay
+                loop={false}
+                style={styles.absoluteLottie}
+              />
             )}
-            <Pressable style={styles.closeButton} onPress={() => setShowModal(false)}>
-              <Text style={styles.closeButtonText}>Fechar</Text>
-            </Pressable>
           </View>
+        </Modal>
 
-          {/* Lottie de confete absoluto sobre a tela */}
-          {showConfetti && (
-            <LottieView
-              source={require('@/assets/animations/Congregations.json')}
-              autoPlay
-              loop={false}
-              style={styles.absoluteLottie}
-            />
-          )}
-        </View>
-      </Modal>
-
-      {/* Modal da contagem regressiva */}
-      <Modal
-        animationType="fade"
-        transparent
-        visible={showModal2}
-        onRequestClose={() => setShowModal2(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={styles.countdownText}>
-              {countdown !== null ? countdown : ''}
-            </Text>
-            <Text style={styles.modalText}>
-              Sorteio do {currentPrize} começando...
-            </Text>
+        {/* Modal da contagem regressiva */}
+        <Modal
+          animationType="fade"
+          transparent
+          visible={showModal2}
+          onRequestClose={() => setShowModal2(false)}
+        >
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <Text style={styles.countdownText}>
+                {countdown !== null ? countdown : ''}
+              </Text>
+              <Text style={styles.modalText}>
+                Sorteio do {currentPrize} começando...
+              </Text>
+            </View>
           </View>
-        </View>
-      </Modal>
+        </Modal>
+      </View>
     </View>
   );
 }

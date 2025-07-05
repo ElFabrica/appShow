@@ -75,7 +75,7 @@ export const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: '#FFFFFF',
-    width: 320, // w-80
+    width: RFValue(320), // w-80
     padding: 20,
     borderRadius: 12,
     shadowColor: "#000",

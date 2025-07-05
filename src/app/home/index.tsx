@@ -165,7 +165,7 @@ export function Home({ navigation }: StackRoutesProps<"home">) {
                 >
                     <View style={styles.modalOverlay}>
                         <View style={styles.modalContent}>
-                            <Text style={styles.modalTitle}>Acesso Tasks</Text>
+                            <Text style={styles.modalTitle}>Acesso Sorteio</Text>
 
                             <TextInput
                                 placeholder="Digite a chave"
